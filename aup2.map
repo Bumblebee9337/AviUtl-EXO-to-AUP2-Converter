@@ -1,0 +1,727 @@
+[project]
+version=2005100
+file=
+display.scene=0
+preview.scene=0
+[scene.0]
+scene=0
+name=Root beer
+video.width=1920
+video.height=1080
+video.rate=30
+video.scale=1
+audio.rate=44100
+cursor.frame=0			Mapping template for .exo to .aup2 parsing (courtesy of Google Translate)
+cursor.layer=0			best viewed with a dedicated text editor such as Notepad++
+preview.frame=0
+display.frame=0
+display.layer=0
+display.zoom=5000
+display.order=0
+display.camera=
+display.grid.x=16,-16
+display.grid.y=16,-16
+display.grid.width=200
+display.grid.height=200
+display.grid.step=200.00000
+display.grid.range=10000.000000
+display.tempo.bpm=120.000000
+display.tempo.beat=4
+display.tempo.start=0.000000
+display.tempo.offset=0.000000
+
+
+layer=0
+frame=0,99
+
+				lines 1-36 are hardcoded, do not rearrange their order
+
+:Image file
+effect.name=画像ファイル		Image file	aup2 parameter block
+effect.disable=0
+ファイル=				:file
+表示番号=0,0,再生範囲,0		Display Number=0,0,Playback Range,0
+再生速度=100.00			Playback Speed		equivalent exo key	:vPlay
+ループ再生=0			:Loop playback
+連番ファイル=0			Sequential File
+
+
+:Standard drawing
+effect.name=標準描画		Standard drawing [Standard Mode]
+X=0.00				:X
+Y=0.00				:Y
+Z=0.00				:Z
+Group=1				Group
+中心X=0.00			:Center X
+中心Y=0.00			:Center Y
+中心Z=0.00			:Center Z
+Group3=1			Group3
+X軸回転=0.00			Rotate X-axis		:X-Spin
+Y軸回転=0.00			Rotate Y-axis		:Y-Spin
+Z軸回転=0.00			Rotate Z-axis		:Rotation
+Group2=1			Group2
+拡大率=100.000			Scale				:Zoom%
+縦横比=0.000			Aspect Ratio			:rAspect
+透明度=0.00			Transparency			:Clearness
+合成モード=通常			Blending Mode=Normal		:blend
+
+
+:Advanced drawing
+effect.name=標準描画		Standard drawing	copy for capturing Z-Spin key
+X=0.00				:X
+Y=0.00				:Y
+Z=0.00				:Z
+Group=1				Group
+中心X=0.00			:Center X
+中心Y=0.00			:Center Y
+中心Z=0.00			:Center Z
+Group3=1			Group3		replace Rotation with Z-Spin
+X軸回転=0.00			Rotate X-axis		:X-Spin
+Y軸回転=0.00			Rotate Y-axis		:Y-Spin
+Z軸回転=0.00			Rotate Z-axis		:Z-Spin
+Group2=1			Group2
+拡大率=100.000			Scale				:Zoom%
+縦横比=0.000			Aspect Ratio			:rAspect
+透明度=0.00			Transparency			:Clearness
+合成モード=通常			Blending Mode=Normal		:blend
+
+
+:Video file
+effect.name=動画ファイル		Video file
+再生位置=0.000			:Playback position
+再生速度=100.00			Playback Speed		:vPlay
+ファイル=				:file
+トラック=0				Track
+ループ再生=0			:Loop playback
+音声付き=1			With Audio
+YUV=				YUV
+fps調整=0			FPS adjustment
+
+
+:Audio file
+effect.name=音声ファイル		Audio file
+再生位置=0.000			:Playback position
+再生速度=100.00			Playback Speed		:vPlay
+ファイル=				:file
+トラック=0				Track
+ループ再生=0			:Loop playback
+
+
+:Standard playback
+effect.name=音声再生		Audio Playback
+音量=100.00			:Volume
+左右=0.00			:Left/Right
+
+
+:Volume fade
+effect.name=音量フェード		Volume fade
+イン=0.50				:In
+アウト=0.50			:Out
+
+
+:Volume level
+effect.name=音量調整		Volume adjustment	this is the closest equivalent
+音量=100.00			volume		:Level
+左右=0.00			left/right
+
+
+Audio delay
+	placeholder
+
+
+:Monaural
+effect.name=モノラル化		"Mono"		:Monaural
+effect.disable=1		:_disable
+比率=0.00			:ratio
+
+
+:Text
+effect.name=テキスト		Text
+サイズ=60.00			:Size
+字間=0.00			Character Spacing	:spacing_x
+行間=0.00			Line Spacing		:spacing_y
+表示速度=0.00			Display Speed		:vDisplay
+フォント=Yu Gothic UI		Font			:font
+文字色=ffffff			Text Color		:color
+影・縁色=000000			Shadow/Border Color	:color2
+文字装飾=標準文字			Text decoration		:type
+文字揃え=左寄せ[上]		Text alignment		:align
+B=0				:B
+I=0				:I
+テキスト=				:text
+文字毎に個別オブジェクト=0		Individual object per character		:1char1obj
+自動スクロール=0			Auto-scroll				:Automatic scrolling
+移動座標上に表示=0		Display on movement coordinates
+オブジェクトの長さを自動調節=0		Auto-adjust object length		:autoadjust
+
+
+:Decoration type
+標準文字			Standard Text
+影付き文字		Shadowed Text
+影付き文字(薄)		Shadowed Text (Light)
+縁取り文字		Bordered Text
+縁取り文字(細)		Bordered Text (Thin)
+縁取り文字(太)		Bordered Text (Thick)		AviUtl2 only
+縁取り文字(角)		Bordered Text (Corner)		AviUtl2 only
+
+
+:Text alignment
+左寄せ[上]		Left Align [Top]
+中央揃え[上]		Center Align [Top]
+右寄せ[上]		Right Align [Top]
+左寄せ[中]		Left Align [Center]
+中央揃え[中]		Center Align [Center]
+右寄せ[中]		Right Align [Center]
+左寄せ[下]		Left Align [Bottom]
+中央揃え[下]		Center Align [Bottom]
+右寄せ[下]		Right Align [Bottom]
+縦書 上寄[右]		Vertical Top [Right]
+縦書 中央[右]		Vertical Center [Right]
+縦書 下寄[右]		Vertical Bottom [Right]
+縦書 上寄[中]		Vertical Top [Center]
+縦書 中央[中]		Vertical Center [Center]
+縦書 下寄[中]		Vertical Bottom [Center]
+縦書 上寄[左]		Vertical Top [Left]
+縦書 中央[左]		Vertical Center [Left]
+縦書 下寄[左]		Vertical Bottom [Left]
+
+
+:Scene
+effect.name=シーン		Scene [Video Mode, Standard Mode]
+再生位置=0.000			:Playback position
+再生速度=100.00			Playback Speed		:vPlay
+シーン=0				Scene			:
+ループ再生=0			:Loop playback
+
+
+:Scene (audio)
+effect.name=シーン		Scene [Audio Output]
+再生位置=0.000			:Playback position
+再生速度=100.00			Playback Speed		:vPlay
+シーン=0				Scene			:
+ループ再生=0			:Loop Playback
+
+
+				:Sync with the scene
+
+
+:Scene change
+effect.name=シーンチェンジ		Scene Change		default is Crossfade (name="")
+種類=クロスフェード			Type=Crossfade		:name
+角度=0				Angle
+分割数=5				Number of Divisions
+ぼかし=2				Blur
+縦方向=0				Vertical
+反転=0				Invert			:Reversal
+縦横比固定=1			Aspect Ratio Lock
+
+
+:Reel spin
+effect.name=リール回転(シーンチェンジ)		Reel Rotation [Transition]
+回転数=0					Rotation Count		:Adjustment
+ブラー=100.0				Blur			:track1
+横回転=0					Horizontal Rotation	Sidespin flag	:check0
+
+
+:Shatter
+effect.name=砕け散る		Shatter [Transition]
+開始時間=0.00			Start Time=0.00			:delay
+再生速度=1.00			Regeneration Speed=1.00		:step
+中心X=0.0			Center X=0.0			:ax
+中心Y=0.0			Center Y=0.0			:ay
+中心Z=0.0			Center Z=0.0			:az
+破片サイズ=50.0			Fragment Size=50.0		:Adjustment
+速度=100.0			Velocity=100.0			:speed
+重力=100.0			Gravity=100.0			:grav
+時間差=100.0			Time Difference=100.0		:diff
+距離影響=100.0			Distance Influence=100.0	:impact
+ランダム回転=100.0			Random Rotation=100.0		:spin
+ランダム方向=100.0			Random Direction=100.0
+
+
+:Graphic
+effect.name=図形			Figure
+図形の種類=背景			Shape Type=Background		:type
+サイズ=100			Size				:size
+縦横比=0.00			Aspect Ratio			:rAspect
+ライン幅=4000			Line Width
+色=00ff00			Color				:color
+角を丸くする=0			Round Corners
+
+
+:Shape type
+背景		Background
+円		Circle
+四角形		Rectangle
+三角形		Triangle
+五角形		Pentagon
+六角形		Hexagon
+星型		Star
+ハート		Heart
+
+
+:Noise
+effect.name=ノイズ		Noise
+強さ=100.0			:Strength
+速度X=0.0			VelocityX	:Speed X
+速度Y=0.0			VelocityY	:Speed Y
+変化速度=0.5			Change Rate	:dy/dx
+周期X=0.01			PeriodX		:Cycle X
+周期Y=0.10			PeriodY		:Cycle Y
+しきい値=100.0			:Threshold
+シード=1				Seed	:seed
+合成モード=アルファ値と乗算		Blending Mode=Multiply by Alpha Value		:mode
+ノイズの種類=Type1			Noise Type	:type
+
+
+:Color compensation
+effect.name=色調補正		Color Correction	:Color compensation
+明るさ=100.00			Brightness		:Lightness
+コントラスト=100.00			:Contrast
+色相=0.00			:Hue
+輝度=100.00			:Luminance
+彩度=100.00			Saturation		:Chroma
+飽和する=1			Saturate		:Saturated
+
+
+:Color shift
+effect.name=色ずれ		Color shift
+ずれ幅=5.0			Shift width		:Gap width
+角度=90.00			:Angle
+強さ=100				:Strength
+色ずれの種類=赤緑A			Color shift type	:type
+
+
+:CS type
+赤緑A		Red-Green A
+赤青A		Red-Blue A
+緑青A		Green-Blue A
+赤緑B		Red-Green B
+赤青B		Red-Blue B
+緑青B		Green-Blue B
+
+
+:Group control
+effect.name=グループ制御		Group control
+X=0.00				:X
+Y=0.00				:Y
+Z=0.00				:Z
+Group=1				Group
+X軸回転=0.00			X-axis rotation		:X-Spin
+Y軸回転=0.00			Y-axis rotation		:Y-Spin
+Z軸回転=0.00			Z-axis rotation		:Z-Spin
+拡大率=100.000			Scale				:Zoom%
+対象レイヤー数=1			Number of target layers		:range
+
+
+:Clipping
+effect.name=クリッピング		Clipping
+上=0				:Top
+下=0				:Bottom
+左=0				:Left
+右=0				:Right
+中心の位置を変更=0		Change Center Position		:Change the center position
+
+
+:Diagonal clipping
+effect.name=斜めクリッピング		effect.name=Diagonal Clipping
+中心X=0.0			:Center X
+中心Y=0.0			:Center Y
+Group=1				Group=1
+角度=33.00			:Angle
+ぼかし=1				:Blur
+幅=0				:Width
+
+
+:Mask
+effect.name=マスク		effect.name=Mask
+X=0.0				:X
+Y=0.0				:Y
+Group=1				Group=1
+回転=0.00			:Rotation
+サイズ=100			:Size
+縦横比=0.00			Aspect Ratio	:rAspect
+ぼかし=0				:Blur
+マスクの種類=円			Mask Type=Circle	:type
+シーンの長さを合わせる=0		Fit to Scene Length	:mode
+マスクの反転=0			:Invert mask
+元のサイズに合わせる=0		Fit to Original Size	:Match with original size
+
+
+:Reversal
+effect.name=反転			Reversal
+上下反転=0			:Flip vertical
+左右反転=0			:Flip horizontal
+輝度反転=0			:Invert luminance
+色相反転=0			:Hue inversion
+透明度反転=0			:Transparency inversion
+
+
+:Zoom%
+effect.name=拡大率		Zoom%
+拡大率=100.000			Magnification		:Zoom%
+X=100.000			:X
+Y=100.000			:Y
+Z=100.000			:Z
+
+
+:Add border
+effect.name=枠線			Border
+X=0				:X
+Y=0				:Y
+サイズ=55				:Size
+丸み=0				Roundness	:Blur
+枠色=ce9d7d			BorderColor	:color
+パターン画像=			PatternImage
+
+
+:Monochromatic
+effect.name=単色化		Monochromatic
+強さ=100.0			:Strength
+色=ffffff			Color	:color
+輝度を保持する=1			Maintain Brightness	:Keep luminance
+
+
+:Boundary blurring
+effect.name=境界ぼかし		Boundary Blur
+範囲=5				:Range
+縦横比=0.00			Aspect Ratio	:rAspect
+透明度の境界をぼかす=0		Blur Transparency Boundary	:Clearness
+
+
+:Fade
+effect.name=フェード		effect.name = Fade
+イン=0.50				:In
+アウト=0.50			:Out
+
+
+:Chroma Key
+effect.name=クロマキー		Chromakey
+色相範囲=16			Hue range	:~Hue
+彩度範囲=96			Saturation range	:~Chroma
+境界補正=1			Boundary correction		:dEdge
+基準色=				Base color			:color_yc
+色彩補正=0			Color correction		:Chromatic correction
+透過補正=0			Transparency correction		:Transmission correction
+
+
+:De-interlacing
+effect.name=インターレース解除	effect.name = Deinterlace
+解除方法=奇数			Deinterlace method	:type
+
+
+:Interlace type
+奇数			Odd
+偶数			Even
+二重化			Duplicate (BOB)
+
+
+:Mirror
+effect.name=ミラー			effect.name=Mirror
+透明度=0.0			Transparency=0.0		:Clearness
+減衰=0.0				Attenuation=0.0			:Attenuate
+境目調整=0			Edge Adjustment=0		:dEdge
+ミラーの方向=下側			Mirror Direction=Downward	:type
+中心の位置を変更=0		Change Center Position=0	:Change the center position
+
+:Mirror direction
+上側				Mirror direction = Up
+下側				Mirror direction = Down
+左側				Mirror direction = Left
+右側				Mirror direction = Right
+
+
+:Region expansion
+effect.name=領域拡張		Area Expansion
+上=0				:Top
+下=0				:Bottom
+左=0				:Left
+右=0				:Right
+塗りつぶし=0			:Fill
+
+
+:Blur
+effect.name=ぼかし
+範囲=5				:Range
+縦横比=0.00			Aspect Ratio	:rAspect
+光の強さ=0.0			Intensity	:Light Stre
+サイズ固定=0			:Fixed Size
+
+:Motion blur
+effect.name=モーションブラー		effect.name=Motion Blur
+間隔=1.00			:Interval
+分解能=10			:Resolution
+残像=0				Afterimage
+
+
+:Time control
+effect.name=時間制御(オブジェクト)			Time Control
+位置=0.000,100.000,直線移動(時間制御),0		Position = 0.000, 100.000, Linear Movement (Time Control), 0	:Position
+繰り返し=1					:Repeat
+コマ落ち=1					Frame Drop			:Decimation
+対象レイヤー数=0					Number of Target Layers		:range
+
+
+:Audio waveform display
+effect.name=音声波形表示				Audio waveform display
+横幅=800						:Width
+高さ=400						:Height
+再生位置=0.000,0.000,再生範囲,0			:Playback position
+再生速度=100.00					Playback speed
+音量=100.00					:Volume
+ファイル=						:file
+波形の色=ffffff					Waveform color=ffffff	:color
+波形のプリセット=					Waveform preset		:type
+スペクトラム表示=0					Spectrum display	:mode
+ミラー表示=0					Mirror display		:mirror
+横解像度=0					Horizontal resolution	:res_w
+縦解像度=0					Vertical resolution	:res_h
+横スペース=0					Horizontal space	:pad_w
+縦スペース=0					vertical space		:pad_h
+
+
+:Gradient
+effect.name=グラデーション		Gradient
+強さ=100.0			:Strength
+中心X=0.0			:Center X
+中心Y=0.0			:Center Y
+Group=1				Group
+角度=0.00			:Angle
+幅=100				:Width
+合成モード=通常			Blending Mode=Normal	:blend
+形状=線形			Shape		:type
+開始色=ffffff			Start Color	:color
+終了色=				End Color	:color2
+
+:Gradient shape
+線形			Linear
+円形			Circular
+矩形			Rectangular
+凸形			Convex
+
+
+:Blend mode
+通常			Normal		(blend 0)
+加算			Add		:Additive
+減算			Subtract	:Subtractive
+乗算			Multiply
+スクリーン			Screen
+オーバーレイ		Overlay
+比較(明)			Lighten		:Brighter
+比較(暗)			Darken		:Darker
+輝度			Luminance
+色差			Chromatic Difference	:Color difference
+陰影			Shades			:Shadow
+明暗			Light/Dark		:Contrast
+差分			Difference	(blend 12)
+
+
+:Movement type
+直線移動,0		Linear Movement			equivalent to Rectilinear (exo ID 1)
+直線移動,1		Linear Movement + Accelerate
+直線移動,2		Linear Movement + Decelerate
+補間移動,3		Interpolated / Curve + Accelerate & Decelerate	(exo ID 103)
+補間移動,0		Interpolated / Curve		(exo ID 2)
+瞬間移動,0		Instant Jump Cut		(exo ID 3)	Teleportation
+ランダム移動,0		Random Movement			(exo ID 6)
+反復移動,0		Repeat / Bounce			(exo ID 8)
+
+
+:Focus line
+effect.name=集中線	Concentration Line [Custom object]
+濃さ=40.0		Density				:track0
+速さ=25.0		Speed				:track1
+中心幅=300.0		Center Width			:track2
+色=ffffff		Color		exo version is param=color=0xffffff	:color
+
+
+:Custom object ExoType
+Focus line	0*	this is an exo keyvalue block
+Scan line	1	only some of these objects have an aup2 equivalent
+Counter		2*	confirmed equivalents are marked with an asterisk
+Lens flare	3*
+Cloud		4
+Star		5*
+Snow		6
+Rain		7
+Random accessory placement	8
+Line (motion track)	9
+Pie		10
+Polygon		11
+Vignette	12
+Flare		13
+
+
+:Counter
+effect.name=カウンター		Counter [Custom object]
+初期値=0.0			Initial value				:track0
+速度=1.0				Speed					:track1
+サイズ=34.0			Size					:track2
+表示形式=標準			Display format = Standard		:track3
+フォント名=MS UI Gothic		Font name				:font
+装飾タイプ=標準文字		Decoration type = Standard text		:deco
+文字色=ffffff			Text color				:col1
+影・縁色=000000			Shadow/border color			:col2
+
+
+:Display format
+標準			Standard
+桁揃え(2桁)		2-digit alignment
+桁揃え(3桁)		3-digit alignment
+桁揃え(4桁)		4-digit alignment
+時間(分秒)		Hours (minutes/seconds)
+時間(分秒ミリ)		Hours (minutes/seconds/milliseconds)
+時間(時分秒)		Hours (hours/minutes/seconds)
+時間(時分秒ミリ)		Hours (hours/minutes/seconds/milliseconds)
+
+
+:Lens flare
+effect.name=レンズフレア		Lens Flare [Custom object]
+方向X=350.0			Direction X			:track0
+方向Y=300.0			Direction Y			:track1
+サイズ=230.0			Size				:track2
+光芒強さ=0.50			Intensity			:c_alp
+光芒長さ=1.3			Lens Length			:c_len
+光芒数=30			Number of Rays			:c_num
+光芒拡大率=1.1			Magnification			:c_zoom
+光芒変化速度=1.1			Rapid Change Rate		:speed
+虹輪強さ=0.60			Halo Intensity			:r_alp
+虹輪拡大率=1.2			Halo Magnification		:r_zoom
+虹輪開閉率=1.1			Halo Opening/Closing Rate	:r_open
+虹輪数=1				Number of Halos			:r_cnt
+光輪強さ=0.15			Halo Intensity			:l_alp
+光輪拡大率=1.0			Halo Magnification		:l_zoom
+点滅=0.20			Flashing			:blink
+形状角度=20.00			Shape Angle			:f_rot
+形状=円				Shape=Circle			:f_fig
+光芒色=ffffff			Color				:f_col
+光輪ｽｸﾘｰﾝ合成=0			Halo Screen Blending		:l_blend
+
+
+:Star
+effect.name=星			Star [Custom object]
+個数=1500.0			Quantity		:track0
+速度=6.0				Speed			:track1
+広がり=12.0			Spread			:track2
+奥行き=20.0			Depth			:track3
+サイズ=30.0			Size=			:size
+色=ddddff			Color			:col
+形状=円				Shape			:name
+フェードイン時間=0.15		Fade-in time		:f_in
+フェードアウト時間=0.15		Fade-out time		:f_out
+
+
+:Animation effect
+effect.name=震える	"Tremble"	this object contains many animations
+振幅=5.0			Amplitude			:track0
+角度=10.0		Angle				:track1
+間隔=0.0			Interval			:track2
+
+
+:Pixel synthesis
+アルファ値と乗算		Multiply by Alpha Value		:Multiply with alpha
+明るさと乗算		Brightness and multiplication	:Multiply with luminance
+
+
+:Shadow
+effect.name=ドロップシャドウ		effect.name = Drop Shadow
+X=-40				:X
+Y=24				:Y
+濃さ=40.0			Intensity		:Thickness
+拡散=10				:Diffusion
+影色=000000			Shadow Color = 000000	:color
+影を別オブジェクトで描画=0		Draw Shadow as Separate Object		:Draw shadow as separate object
+
+
+:Glow
+effect.name=グロー		effect.name=Glow
+強さ=40.00			:Strength
+拡散=50				:Diffusion
+角度=25.00			Angle
+しきい値=80.0			:Threshold
+比率=100.0			Ratio
+ぼかし=1				:Blur
+形状=クロス(4本)			Shape=			:type
+光色=				Light Color		:color
+光成分のみ=0			Light Component Only	:Light only
+サイズ固定=0			Fixed Size
+
+
+:Glow shape
+通常			Normal
+クロス(4本)		Cross (4 lines)
+クロス(6本)		Cross (6 lines)
+クロス(8本)		Cross (8 lines)
+クロス(10本)		Cross (10 lines)
+クロス(12本)		Cross (12 lines)
+ライン			Line
+
+
+:Emission
+effect.name=発光		effect.name=Emission
+強さ=100.0		Intensity		:Strength
+拡散=250			:Diffusion
+しきい値=80.0		:Threshold
+拡散速度=0		Diffusion Rate		:vDiffuse
+光色=			Color			:color
+サイズ固定=0		Size Fixed=0
+
+
+:Luminance Key
+effect.name=ルミナンスキー		effect.name=Luminance Key
+基準輝度=2048			Base Brightness			:RefLuminance
+輝度範囲=512			Brightness Range		:Blur
+モード=暗い部分を透過		Mode				:type
+
+
+:Luminance Mode
+暗い部分を透過			Transmit dark areas
+明るい部分を透過			Transmit bright areas
+明暗部分を透過			Transmit light and dark areas
+明暗部分を透過(補間無し)		Transmit light and dark areas (no interpolation)
+基準部分を透過			Transmit reference area
+基準部分を透過(補間無し)		Transmit reference area (no interpolation)
+
+
+:Image tiling
+effect.name=画像ループ		effect.name = Image Loop
+横回数=2				Horizontal Count	:Hx#
+縦回数=2				Vertical Count		:Vy#
+オフセットX=0.000			Offset X		:Speed X
+オフセットY=0.000			Offset Y		:Speed Y
+個別オブジェクト=0			:Individual Objects
+
+
+:Mosaic
+effect.name=モザイク		effect.name=Mosaic
+サイズ=12				:Size
+タイル風=0			:Tile style
+
+
+:Ripple
+effect.name=波紋			effect.name=Ripple
+中心X=0.0			:Center X
+中心Y=0.0			:Center Y
+Group=1				Group=1
+幅=30.0				:Width
+高さ=15.0			:Height
+速度=150.0			Velocity		:Speed
+波紋数=0				Number of Ripples	:num
+波紋間隔=0			Ripple Interval		:interval
+増幅減衰回数=0			Amplification/Attenuation Count		:add
+
+
+:Raster
+effect.name=ラスター		effect.name=raster
+横幅=100				:Width
+高さ=100				:Height
+周期=1.00			:Period
+縦ラスター=0			:Vertical raster
+ランダム振幅=0			:Random amplitude
+
+
+effect.name=縁取り		Outline
+サイズ=55				Size
+ぼかし=5				Blur
+縁色=ff0037			Outline Color
+パターン画像=			Pattern Image
