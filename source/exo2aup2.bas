@@ -2,13 +2,13 @@ print : print " EXO >> AUP2 parser"
 #include once "Afx\AfxStr.inc"
 #include once "Afx\CFindFile.inc"
 #include once "string.bi"
-dim shared as string a,b,c,d,e,ee,f(),h,r,rx,pp,tv,rsf
+dim shared as string a,b,c,d,e,ee,f(),h,r,rx,pp,tv,rsf,pm
 dim shared as string scene_array(0 To 50) 'scene limit for aup projects
 dim shared as CWSTR tm
 dim shared as integer j,k,m,n,g,w,fc,jj,kk
 dim shared as boolean vv,na
 dim shared as double fr
-const pm = "C:\Decoy\Video\Migration\"
+'const pm = "C:\Decoy\Video\Migration\"
 
 
 
@@ -626,9 +626,9 @@ end sub
 
 
 
-chdir pm
+'chdir pm
 'goto x666
-'pm  = curdir
+pm  = curdir
 print " Working folder: ";pm
 h = "aup2.map" : n = AfxFileScanA(h) + 1 : redim f(1 to n,1 to 2)
 print " Mapping array:";ubound(f);" elements"
