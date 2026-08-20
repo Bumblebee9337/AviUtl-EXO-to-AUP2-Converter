@@ -535,6 +535,14 @@ effect.name=集中線	Concentration Line [Custom object]
 色=ffffff		Color		exo version is param=color=0xffffff	:color
 
 
+:Pie
+effect.name=扇型		Fan Shape		not equivalent to Pie object
+中心角=270.0		Central angle		:track0
+サイズ=100.0		Size			:track2
+ライン幅=2000.0		Range			:track3
+色=ffffff		Color			:color
+
+
 :Custom object ExoType
 Focus line	0*	this is an exo keyvalue block
 Scan line	1	only some of these objects have an aup2 equivalent
@@ -549,7 +557,7 @@ Line (motion track)	9
 Pie		10
 Polygon		11
 Vignette	12
-Flare		13
+Flare		13*
 
 
 :Counter
@@ -596,6 +604,20 @@ effect.name=レンズフレア		Lens Flare [Custom object]
 形状=円				Shape=Circle			:f_fig
 光芒色=ffffff			Color				:f_col
 光輪ｽｸﾘｰﾝ合成=0			Halo Screen Blending		:l_blend
+
+
+:Flare
+effect.name=フレア		Flare
+サイズ=300.0			Size				:track0
+光芒長さ=85.0			Flare Length			:track1
+光芒数=35.0			Number of Flares		:track2
+光芒強さ=0.50			Flare Intensity			:c_alp
+光芒変化速度=0.2			Flare Change Rate		:speed
+水平光芒=800.0			Horizontal Flare		:track3
+水平光芒高さ=0.10			Horizontal Flare Height		:h_len
+水平光芒数=1			Number of Horizontal Flares	:h_num
+点滅=0.0				Flashing			:blink
+光芒色=9999ff			Flare Color			:f_col
 
 
 :Star
@@ -719,9 +741,3 @@ effect.name=ラスター		effect.name=raster
 縦ラスター=0			:Vertical raster
 ランダム振幅=0			:Random amplitude
 
-
-effect.name=縁取り		Outline
-サイズ=55				Size
-ぼかし=5				Blur
-縁色=ff0037			Outline Color
-パターン画像=			Pattern Image
