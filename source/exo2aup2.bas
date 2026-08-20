@@ -2,13 +2,13 @@ print : print " EXO >> AUP2 parser"
 #include once "Afx\AfxStr.inc"
 #include once "Afx\CFindFile.inc"
 #include once "string.bi"
-dim shared as string a,b,c,d,e,ee,f(),h,r,rx,pp,tv,rsf,pm
+dim shared as string a,b,c,d,e,ee,f(),h,r,rx,pp,tv,rsf
 dim shared as string scene_array(0 To 50) 'scene limit for aup projects
 dim shared as CWSTR tm
 dim shared as integer j,k,m,n,g,w,fc,jj,kk
 dim shared as boolean vv,na
 dim shared as double fr
-'const pm = "C:\Decoy\Video\Migration\"
+const pm = "C:\Decoy\Video\Migration\"
 
 
 
@@ -79,7 +79,7 @@ Sub ExtractAupScenes (ByRef aup_path As String)
     select case scene_count
         case 0 : print "No scenes were found."
         case 1 : print "1 scene was found. Project is oomplete."
-        case else : print "This project contains";k;" scenes." : vv = true
+        case else : print "This project contains";scene_count;" scenes." : vv = true
     end select
 End Sub
 
@@ -378,10 +378,7 @@ x350:
 
 
     n = AfxFileScanA(r,"param=")
-    print " SemicolonSV parameters =";n
-    'if n = 0 then goto x400
-
-
+    print " SemicolonSV parameters:";n
     'unpack Custom object parameters: they are stored in a semicolon chain
     open r for input as #1
     open "csv2.dat" for output as #2
@@ -397,7 +394,7 @@ x350:
                 case "type" : scene_array(0) = "_name=" & f(j + val(c),1) : continue do 'rename custom object according to its type
                 case "param" 'convert into INI style key values
                     c = AfxStrReplace(c,";",chr(13) & chr(10)) : c = AfxStrReplace(c,chr(34),"")
-                    c = AfxStrReplace(c,"0x","") : a = trim(c,chr(13) & chr(10))
+                    c = AfxStrReplace(c,"0x","") : a = rtrim(c,chr(13) & chr(10))
                 case "check0","filter","name" : continue do
             end select
             g = g + 1 : scene_array(g) = a
@@ -409,8 +406,6 @@ x350:
     'sleep:end
     AfxFileCopy "csv2.dat",r
 
-
-x400:
 
 
     'mapping algorithm
@@ -472,17 +467,14 @@ x400:
                 d = str((val(c)-0.5)/29.970) 'project frame rate *need to remember it
                 d = format(val(d),"0.000") : write #3,w,d
                 write #5,val(rsf),d, 'remember start frame & playback position
-            case "Scene (audio):Sync with the scene"
-                if c = "1" then 'sync the audio playback position with the video
-                    close #5
-                    open "scene linker.lst" for input as #5
-                    do until eof(5) 'find the correct start frame
-                        input #5,m,d,r : if m = val(rsf) then c = d : exit do
-                    loop
-                    close #5
-                    open "scene linker.lst" for append as #5
-                end if
-                FindExoKey("Scene (audio):Playback position") : write #3,w,c
+            case "Scene (audio):Sync with the scene" : close #5
+                open "scene linker.lst" for input as #5
+                do until eof(5) 'find the correct start frame
+                    input #5,m,d,r : if m = val(rsf) then exit do
+                loop
+                close #5
+                open "scene linker.lst" for append as #5
+                if c = "1" then FindExoKey("Scene (audio):Playback position") : write #3,w,d
                 FindExoKey("Scene (audio):") : write #3,w,r 'scene ID
             case "Audio waveform display:type" : write #3,w,str(val(c) - 1) 'exo type 1-5 vs presets *nfv*
             case "Noise:type" : write #3,w,"Type" & str(val(c) + 1)
@@ -634,8 +626,9 @@ end sub
 
 
 
-'chdir pm
-pm  = curdir
+chdir pm
+'goto x666
+'pm  = curdir
 print " Working folder: ";pm
 h = "aup2.map" : n = AfxFileScanA(h) + 1 : redim f(1 to n,1 to 2)
 print " Mapping array:";ubound(f);" elements"
@@ -659,8 +652,10 @@ open "parameter.ini" for input as #7
 open "project.lst" for output as #10
 print " Processing extended edit export files:"
 FileScan("*.exo") : close : vv = false
+'x666:
 print " Examining AviUtl project files:"
 FileScan("*.aup")
+'for n = 0 to k:?n,scene_array(n):next:sleep:end
 if vv = false then goto x655
 open "project.lst" for input as #1
 h = AfxGetFileName(d) & ".aup2" : open h for output as #3
