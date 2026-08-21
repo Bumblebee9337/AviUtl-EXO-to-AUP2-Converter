@@ -3,7 +3,7 @@ print : print " EXO >> AUP2 parser"
 #include once "Afx\CFindFile.inc"
 #include once "string.bi"
 dim shared as string a,b,c,d,e,ee,f(),h,r,rx,pp,tv,rsf,pm
-dim shared as string scene_array(0 To 50) 'scene limit for aup projects
+dim shared as string scene_array(0 To 49) 'scene limit for aup projects
 dim shared as CWSTR tm
 dim shared as integer j,k,m,n,g,w,fc,jj,kk
 dim shared as boolean vv,na
@@ -35,52 +35,70 @@ Sub ExtractAupScenes (ByRef aup_path As String)
     If Open(aup_path For Binary Access Read As #1) <> 0 Then
         Print "Error opening .aup project file." : Exit Sub
     End If
-    'Limitation: will not detect scenes if their default names are unedited.
-    Dim As UByte cb = 0
+    'Limitation: will not detect scenes if their default names are unchanged.
+    erase scene_array
+    Dim As UByte cb,sn
     Dim As String string_accumulator, parsed_token
     Dim As Boolean active_recording = False
     dim scene_count As Integer
+    'alternative method for finding scene 1 and beyond
+    seek #1,1
+    do until eof(1) 'find 80EEn marker
+        get #1,,cb : if cb <> 56 then continue do
+        get #1,,cb : if cb <> 48 then continue do
+        get #1,,cb : if cb <> 69 then continue do
+        get #1,,cb : if cb <> 69 then continue do
+        get #1,,cb : if cb <> 110 then continue do
+        j = seek(1) : print " Start marker found at location";j : exit do
+    loop
+    do until eof(1) 'find Tween marker
+        get #1,,cb : if cb <> 84 then continue do
+        get #1,,cb : if cb <> 119 then continue do
+        get #1,,cb : if cb <> 101 then continue do
+        get #1,,cb : if cb <> 101 then continue do
+        get #1,,cb : if cb <> 110 then continue do
+        k = seek(1) : print " End marker found at location";k : exit do
+    loop
+    seek #1,j
+    do until eof(1) 'find ISSMs
+        if seek(1) > k then exit do
+        get #1,,cb : if cb <> 241 and cb <> 242 then continue do
+        get #1,,cb : if cb <> 0 then continue do
+        'Hex F1 00 or F2 00 signature found
+        get #1,,cb : if cb < 5 then continue do 'cb is either 5 or 8
+        get #1,,sn 'scene number
+        if cb = 5 then scene_array(sn) = "Scene " & str(sn) : continue do
+        'length of scene name is 1 or greater
+        'Individual Scene Structural Matrix is 8 bytes
+        if sn = 1 then m = seek(1) - 3 'remember start of the first ISSM
+        seek #1,seek(1) + 7 'jump to the first letter of the scene name
+        g = cb - 8 : d = "" : for n = 1 to g : get #1,,cb : d = d & chr(cb) : next
+        scene_array(sn) = d : scene_count += 1 : If scene_count = 49 Then Exit do 'scene limit reached
+    loop
+    seek #1,j
+    'find root scene
     While Not EOF(1)
-        Get #1, , cb
+        Get #1,,cb
+        if seek(1) > m then exit while
         'Build text data structures sequentially
         If (cb >= 32 And cb <= 126) Or (cb >= 128 And cb <= 254) Then
             string_accumulator &= Chr(cb) : continue while
         End if
         If Len(string_accumulator) >= 3 Then
-            parsed_token = PurifySceneName(string_accumulator) ': ?string_accumulator
-            '1. TERMINATION ANCHOR: Snap shut instantly the second we touch engine definitions
-            select case parsed_token
-                case "Tween","Rotation","BezierTrackT","Video file","Image file" : Exit While
-            End select
-            '2. INITIALIZATION SENTINEL: Use "80EEn" to unlock active parsing safely across all files
-            If (Not active_recording) Then
-                If parsed_token = "80EEn" Then
-                    active_recording = True : string_accumulator = "" : Continue While
-                End If
-            End If
-            '3. COMPACT DATA EXTRACTION LOOP
-            If active_recording AndAlso Len(parsed_token) >= 3 Then
-                'Drop structural timeline variables and plugin identifiers
-                select case parsed_token
-                    case "Video","Audio","Title","Time","Music" ': ?"skipping ";parsed_token
-                    case else
-                        scene_array(scene_count) = parsed_token
-                        'Print "Scene"; scene_count; ": "; scene_array(scene_count)
-                        scene_count += 1
-                        If scene_count > 50 Then Exit While 'scene limit reached
-                end select
-            End If
+            parsed_token = PurifySceneName(string_accumulator)
+            scene_array(0) = parsed_token
         End If
         string_accumulator = ""
     Wend
     Close #1
-    d = aup_path : k = scene_count - 1 : fc = fc + 1
+    d = aup_path : k = scene_count + 1 : fc = fc + 1
     print tab(7);fc;". ";d;": ";
     select case scene_count
         case 0 : print "No scenes were found."
         case 1 : print "1 scene was found. Project is oomplete."
-        case else : print "This project contains";scene_count;" scenes." : vv = true
+        case else : print "This project contains";k;" scenes." : vv = true
     end select
+    'For n = 0 To 50 : Print n;". ";scene_array(n) : Next
 End Sub
 
 
@@ -627,7 +645,6 @@ end sub
 
 
 'chdir pm
-'goto x666
 pm  = curdir
 print " Working folder: ";pm
 h = "aup2.map" : n = AfxFileScanA(h) + 1 : redim f(1 to n,1 to 2)
@@ -652,20 +669,19 @@ open "parameter.ini" for input as #7
 open "project.lst" for output as #10
 print " Processing extended edit export files:"
 FileScan("*.exo") : close : vv = false
-'x666:
 print " Examining AviUtl project files:"
 FileScan("*.aup")
-'for n = 0 to k:?n,scene_array(n):next:sleep:end
 if vv = false then goto x655
 open "project.lst" for input as #1
 h = AfxGetFileName(d) & ".aup2" : open h for output as #3
 fc = fc + 1 : print fc;". ";d;" >> ";h
 print " Matching scenes with their aup2 equivalents . . . combining them in the proper order:"
-for n = 0 to k
+for n = 0 to 49
     a = scene_array(n) : seek #1,1
+    if a = "" then print n : continue for
     do until eof(1)
         input #1,b,c : if a <> b then continue do
-        print n,b;tab(55);c
+        print n;tab(7);b;tab(55);c
         open c for input as #2
         if n = 0 then 'copy project header, root scene header
             line input #2,e : print #3,e : line input #2,e : print #3,e
@@ -691,7 +707,7 @@ for n = 0 to k
         exit do
     loop
     if a <> b then 'append a blank scene
-        print n,a : open "blank.aup2" for input as #2
+        print n;tab(7);a;tab(51);"[!] File containing the scene name was not found." : open "blank.aup2" for input as #2
         HeaderAdjustment
         do until eof(2)
             line input #2,e : print #3,e
@@ -700,7 +716,6 @@ for n = 0 to k
     end if
 next n
 print tab(7);fc;". Output: ";h
-
 'ParseExo ("test.exo")
 'ParseExo ("retro.exo")
 'ParseExo ("narrative.exo")
