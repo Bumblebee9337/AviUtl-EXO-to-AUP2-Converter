@@ -241,10 +241,10 @@ effect.name=砕け散る		Shatter [Transition]
 
 :Graphic
 effect.name=図形			Figure
-図形の種類=背景			Shape Type=Background		:type
-サイズ=100			Size				:size
+図形の種類=背景			Shape Type			:type
+サイズ=100			Size				:Size
 縦横比=0.00			Aspect Ratio			:rAspect
-ライン幅=4000			Line Width
+ライン幅=4000			Line Width			:Line width
 色=00ff00			Color				:color
 角を丸くする=0			Round Corners
 
