@@ -8,7 +8,6 @@ dim shared as CWSTR tm
 dim shared as integer j,k,m,n,g,w,fc,jj,kk
 dim shared as boolean vv,na
 dim shared as double fr
-'const pm = "C:\Decoy\Video\Migration\"
 
 
 
@@ -98,7 +97,7 @@ Sub ExtractAupScenes (ByRef aup_path As String)
         case 1 : print "1 scene was found. Project is oomplete."
         case else : print "This project contains";k;" scenes." : vv = true
     end select
-    'For n = 0 To 50 : Print n;". ";scene_array(n) : Next
+    'For n = 0 To 49 : Print n;". ";scene_array(n) : Next
 End Sub
 
 
@@ -617,10 +616,22 @@ end sub
 
 
 
-sub HeaderAdjustment
+sub HeaderAdjustment()
     for j = 1 to 7 'skip project header, change scene ID
         line input #2,e : if j > 5 then print #3,AfxStrReplace(e,"0",str(n))
     next j    
+end sub
+
+
+
+sub AppendBlankScene()
+    if n > k then exit sub
+    open "blank.aup2" for input as #2
+    HeaderAdjustment
+    do until eof(2)
+        line input #2,e : print #3,e
+    loop
+    close #2    
 end sub
 
 
@@ -644,8 +655,7 @@ end sub
 
 
 
-'chdir pm
-pm  = curdir
+pm  = curdir & "\"
 print " Working folder: ";pm
 h = "aup2.map" : n = AfxFileScanA(h) + 1 : redim f(1 to n,1 to 2)
 print " Mapping array:";ubound(f);" elements"
@@ -665,20 +675,19 @@ print " Parameter block count: ";AfxFileScanA("parameter.ini")
 print " EXO key count:";n
 kill "exo2aup2.log"
 open "parameter.ini" for input as #7
-
 open "project.lst" for output as #10
 print " Processing extended edit export files:"
 FileScan("*.exo") : close : vv = false
 print " Examining AviUtl project files:"
 FileScan("*.aup")
-if vv = false then goto x655
+if vv = false then goto x700
 open "project.lst" for input as #1
 h = AfxGetFileName(d) & ".aup2" : open h for output as #3
 fc = fc + 1 : print fc;". ";d;" >> ";h
 print " Matching scenes with their aup2 equivalents . . . combining them in the proper order:"
 for n = 0 to 49
-    a = scene_array(n) : seek #1,1
-    if a = "" then print n : continue for
+    a = scene_array(n) : if a = "" then print n : AppendBlankScene : continue for
+    seek #1,1
     do until eof(1)
         input #1,b,c : if a <> b then continue do
         print n;tab(7);b;tab(55);c
@@ -706,20 +715,11 @@ for n = 0 to 49
         close #2
         exit do
     loop
-    if a <> b then 'append a blank scene
-        print n;tab(7);a;tab(51);"[!] File containing the scene name was not found." : open "blank.aup2" for input as #2
-        HeaderAdjustment
-        do until eof(2)
-            line input #2,e : print #3,e
-        loop
-        close #2
-    end if
+    if a <> b then AppendBlankScene : print n;tab(7);a;tab(51);"[!] File containing the scene name was not found."
 next n
 print tab(7);fc;". Output: ";h
 'ParseExo ("test.exo")
-'ParseExo ("retro.exo")
-'ParseExo ("narrative.exo")
-x655:
+x700:
 close : print " File migration is done. Press any key to exit."
 sleep : end
 
