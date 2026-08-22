@@ -13,7 +13,7 @@ A standalone parsing engine written in **FreeBASIC** designed to migrate legacy 
 
 ## 🛠️ Usage Instructions
 
-1. Download `exo2aup2.exe` and `aup2.map` into a directory of your choice.
+1. Extract `exo2aup2.exe`, `aup2.map` and `blank.aup2` into a directory of your choice.
 2. Place the source `.exo` files into the directory. To recreate the project itself, include the parent project `.aup` file.
 3. Run the utility to output individual and combined `.aup2` files.
 4. Load the resulting `.aup2` file directly into the AviUtl2/ExEdit2 timeline workspace.
